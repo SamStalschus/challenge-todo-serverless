@@ -27,7 +27,14 @@ functions:
     handler: src/functions/create.handle
     events:
       - http:
-          path: /create
+          path: /create/{user_id}
+          method: POST
+          cors: true
+  list:
+    handler: src/functions/list.handle
+    events:
+      - http:
+          path: /list/{user_id}
           method: GET
           cors: true
 
@@ -43,7 +50,11 @@ resources:
         AttributeDefinitions:
           - AttributeName: id
             AttributeType: S
+          - AttributeName: user_id
+            AttributeType: S
         KeySchema:
           - AttributeName: id
             KeyType: HASH
+          - AttributeName: user_id
+            KeyType: RANGE
 
